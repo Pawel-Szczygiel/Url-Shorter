@@ -31,4 +31,16 @@ app.get('/:shortUrl', async (req, res) => {
     res.redirect(shortUrl.full);
 });
 
+app.get('/delete/all', async (req,res) => {
+    
+   await ShortUrl.deleteMany();
+   res.redirect('/');
+})
+
+app.get('/delete/:id', async (req, res) => {
+    await ShortUrl.deleteOne({_id: req.params.id})
+    res.redirect('/');
+})
+
+
 app.listen(process.env.PORT || 5000, console.log('app is running on port 5000'));
